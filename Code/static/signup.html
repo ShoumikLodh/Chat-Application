@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Signup</title>
+    <script>
+        async function loginEvent(event) {
+            event.preventDefault();
+
+            console.log(event.target);
+
+            const { name, email, password, status } = event.target;
+            const credentials = { name: name.value, email_id: email.value, password: password.value, status: status.value };
+
+            try {
+                const response = await fetch('/signup', {
+                    method: 'POST',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(credentials)
+                });
+                const responseData = await response.json();
+                console.log(responseData);
+                localStorage.setItem('user-id', responseData.user_id);
+                alert("added:"+name.value+" "+email.value+" "+status.value);
+                localStorage.setItem('user-id', responseData.user_id.toString());
+                localStorage.setItem('name', responseData.name);
+                localStorage.setItem('email_id',responseData.email_id);
+                localStorage.setItem('status',responseData.status);
+                window.location.replace('/');
+                window.location.replace('/');
+            }
+            catch (error) {
+                alert("Network error. Please check your connection.");
+            }
+        }
+    </script>
+</head>
+<body class="form-page">
+
+    <div class="login-content">
+        <div class="signup-login">
+            <button class="sign-up" onclick="location.href='http://localhost:3000/login.html'">Login</button>
+            <button class="sign-up" onclick="location.href='http://localhost:3000/signup.html'">Sign up</button>
+        </div>
+        <form class="login-form" onsubmit="loginEvent(event)">
+            <label for="name">Name:</label><br>
+            <input type="text" name="name" required><br>
+            <label for="email">Email id:</label><br>
+            <input type="email" name="email" required><br>
+            <label for="password">Password:</label><br>
+            <input type="password" name="password" required><br>
+            <label for="status">Status:</label><br>
+            <input type="text" name="status" required><br>
+            <button class="form-btn">Send</button><br>
+          </form>
+    </div>
+</body>
+</html>

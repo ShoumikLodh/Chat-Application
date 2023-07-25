@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Chatting</title>
+    <script src="libraries/socket.io.min.js"></script>
+    <script src="index.js" defer></script>
+</head>
+<body>
+    <div class="outer-layout">
+        <div class="side-bar">
+            <button type="button" class="profile-btn"  onclick="showprofile()">PROFILE</button>
+        </div>
+        <div id="chat-box">
+            <div class="chat-type">
+                <button type="button" class="chat-type-btn" onclick="switchToGroups()">Groups</button>
+                <button type="button" class="chat-type-btn" onclick="switchToDMs()">Direct</button>
+            </div>
+        </div>
+        
+        <div class="chatting">
+            <div class="name">
+                <div class="circle" onclick="showgroupmembers()"></div>
+                <h1 id="active-conversationee" onclick="showgroupdescription()"></h1>
+            </div>
+            <div class="chats">
+                <ul id="chat-msgs">
+                </ul>
+            </div>
+            <form class="chat-message" onsubmit="submitChat(event)">
+                <input name="chatinput" type="text" class="chat-message-input" placeholder="Type a message">
+                <button class="send-btn">Send</button>
+            </form>
+        </div>
+       
+        <div class="profile-info" style="display: none;">
+            <div class="name">
+                <div class="circle"></div>
+                <h1 id="user-name"></h1>
+            </div>
+            <ul class="info">
+                <li><h2>About</h2></li>
+                <li><h3 id="user-email"></h3></li>
+            </ul>
+            <ul class="info">
+                <li><h2>Description</h2>
+                <li><h3 id="user-status"></h3></li>
+            </ul>
+        </div>
+
+        <div class="profile-info" id="group-members-info" style="display: none">
+            <div class="name">
+                <div class="circle"></div>
+                <h1 class="group-name-text">DBMS-ALTER EGO</h1>
+            </div>
+            <div class="info-head">
+                <div class="circle" id="circle-pic"></div>
+                <h1 class="group-name-text">DBMS - ALTER EGO</h1>
+            </div>
+            <div>
+                <h2 class="heading">Admins</h2>
+                <ul class="info" id="info-2">
+                </ul>
+            </div>
+            <div>
+                <h2 class="heading">GROUP-Participants</h2>
+                <ul class="info" id="info-3">
+                </ul>
+            </div>
+        </div>
+
+        <div class="profile-info" id="group-info" style="display: none;">
+            <div class="name">
+                <div class="circle"></div>
+                <h1 class="group-name-text">DBMS-ALTER EGO</h1>
+            </div>
+            <div class="info-head">
+                <div class="circle" id="circle-pic"></div>
+                <h1 class="group-name-text">DBMS - ALTER EGO</h1>
+            </div>
+            <ul class="info">
+                <li><h2>Description</h2>
+                <li><h3 id="group-info-text">We the people</h3></li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Login</title>
+    <script>
+        async function loginEvent(event) {
+            event.preventDefault();
+
+            console.log(event.target);
+
+            const { name, email, password } = event.target;
+            const credentials = { name: name.value, email: email.value, password: password.value };
+
+            try {
+                const response = await fetch('/login', {
+                    method: 'POST',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(credentials)
+                });
+                const responseData = await response.json();
+
+                if (Math.floor(response.status/100) !== 2) {
+                    return alert(responseData.message);
+                }
+                console.log(responseData);
+                alert("Logged in successfully");
+                localStorage.setItem('user-id', responseData.user_id.toString());
+                localStorage.setItem('name', responseData.name);
+                localStorage.setItem('email_id',responseData.email_id);
+                localStorage.setItem('status',responseData.status);
+                window.location.replace('/');
+            }
+            catch (error) {
+                alert("Network error. Please check your connection.");
+            }
+        }
+    </script>
+</head>
+<body class="form-page">
+
+    <div class="login-content">
+        <div class="signup-login">
+            <button class="sign-up" onclick="location.href='http://localhost:3000/login.html'">Login</button>
+            <button class="sign-up" onclick="location.href='http://localhost:3000/signup.html'">Sign up</button>
+        </div>
+        <form class="login-form" onsubmit="loginEvent(event)">
+            <label for="name">Name:</label><br>
+            <input type="text" name="name" required><br>
+            <label for="email">Email id:</label><br>
+            <input type="email" name="email" required><br>
+            <label for="password">Password:</label><br>
+            <input type="password" name="password" required><br>
+            <button class="form-btn">Send</button><br>
+          </form>
+    </div>
+</body>
+</html>

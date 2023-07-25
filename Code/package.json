@@ -1,0 +1,21 @@
+{
+  "name": "dbms",
+  "version": "1.0.0",
+  "main": "backend/index.js",
+  "scripts": {
+    "start": "node .",
+    "nodemon": "nodemon ."
+  },
+  "author": "Jatin Tyagi",
+  "license": "ISC",
+  "description": "DBMS Course Project",
+  "dependencies": {
+    "dotenv": "^16.0.0",
+    "express": "^4.17.3",
+    "mysql": "^2.18.1",
+    "socket.io": "^4.4.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
